@@ -109,7 +109,7 @@ class AssetServiceTest {
         assertThatThrownBy(() -> service.get(42L)).isInstanceOf(AssetNotFoundException.class)
                 .hasMessageContaining("42");
         assertThatThrownBy(() -> service.delete(42L)).isInstanceOf(AssetNotFoundException.class);
-        verify(repository, never()).delete(any());
+        verify(repository, never()).delete(any(Asset.class));
     }
 
     @Test
