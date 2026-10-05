@@ -1,0 +1,10 @@
+<header class="topbar">
+  <a routerLink="/assets" class="brand">{{ appName }}</a>
+  <nav>
+    <a routerLink="/assets" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Assets</a>
+    <a routerLink="/assets/new" routerLinkActive="active">Add asset</a>
+  </nav>
+</header>
+<main class="container">
+  <router-outlet />
+</main>

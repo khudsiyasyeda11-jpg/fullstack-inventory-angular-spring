@@ -1,0 +1,32 @@
+<a routerLink="/assets" class="back">← All assets</a>
+
+@if (error(); as e) {
+  <div class="alert" role="alert"><strong>{{ e.title }}</strong> @if (e.detail) { <span>— {{ e.detail }}</span> }</div>
+}
+
+@if (asset(); as a) {
+  <section class="page-header">
+    <div>
+      <p class="tag">{{ a.assetTag }}</p>
+      <h1>{{ a.name }}</h1>
+      <span class="badge status-{{ a.status.toLowerCase() }}">{{ label(a.status) }}</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" [routerLink]="['/assets', a.id, 'edit']">Edit</a>
+      <button type="button" class="btn danger" (click)="remove(a)">Delete</button>
+    </div>
+  </section>
+
+  <dl class="card details">
+    <dt>Category</dt><dd>{{ label(a.category) }}</dd>
+    <dt>Location</dt><dd>{{ a.location }}</dd>
+    <dt>Assigned to</dt><dd>{{ a.assignedTo ?? '—' }}</dd>
+    <dt>Purchase date</dt><dd>{{ a.purchaseDate ? (a.purchaseDate | date: 'mediumDate') : '—' }}</dd>
+    <dt>Purchase cost</dt><dd>{{ a.purchaseCost === null ? '—' : (a.purchaseCost | currency: 'USD') }}</dd>
+    <dt>Notes</dt><dd>{{ a.notes || '—' }}</dd>
+    <dt>Created</dt><dd>{{ a.createdAt | date: 'medium' }}</dd>
+    <dt>Last updated</dt><dd>{{ a.updatedAt | date: 'medium' }}</dd>
+  </dl>
+} @else if (!error()) {
+  <p class="muted">Loading…</p>
+}

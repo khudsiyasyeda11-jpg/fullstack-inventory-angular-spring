@@ -1,0 +1,13 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 56px;
+  background: var(--header);
+  color: #fff;
+}
+.brand { color: #fff; font-weight: 700; text-decoration: none; letter-spacing: 0.2px; }
+nav { display: flex; gap: 16px; }
+nav a { color: #cbd5e1; text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; }
+nav a.active { color: #fff; border-bottom-color: #fff; }

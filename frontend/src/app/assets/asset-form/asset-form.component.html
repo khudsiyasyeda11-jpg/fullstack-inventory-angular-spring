@@ -1,0 +1,59 @@
+<a [routerLink]="isEdit ? ['/assets', id()] : ['/assets']" class="back">← Cancel</a>
+<h1>{{ isEdit ? 'Edit asset' : 'New asset' }}</h1>
+
+@if (problem(); as p) {
+  <div class="alert" role="alert"><strong>{{ p.title }}</strong> @if (p.detail) { <span>— {{ p.detail }}</span> }</div>
+}
+
+<form class="card form-grid" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+  <label>
+    <span>Asset tag *</span>
+    <input formControlName="assetTag" placeholder="LAP-1001" />
+    @if (fieldError('assetTag'); as e) { <small class="error">{{ e }}</small> }
+  </label>
+  <label>
+    <span>Name *</span>
+    <input formControlName="name" placeholder="Rugged laptop 14in" />
+    @if (fieldError('name'); as e) { <small class="error">{{ e }}</small> }
+  </label>
+  <label>
+    <span>Category *</span>
+    <select formControlName="category">
+      @for (c of categories; track c) { <option [value]="c">{{ label(c) }}</option> }
+    </select>
+  </label>
+  <label>
+    <span>Status *</span>
+    <select formControlName="status">
+      @for (s of statuses; track s) { <option [value]="s">{{ label(s) }}</option> }
+    </select>
+  </label>
+  <label>
+    <span>Location *</span>
+    <input formControlName="location" placeholder="Depot North" />
+    @if (fieldError('location'); as e) { <small class="error">{{ e }}</small> }
+  </label>
+  <label>
+    <span>Assigned to</span>
+    <input formControlName="assignedTo" placeholder="Crew 7" />
+    @if (fieldError('assignedTo'); as e) { <small class="error">{{ e }}</small> }
+  </label>
+  <label>
+    <span>Purchase date</span>
+    <input type="date" formControlName="purchaseDate" />
+    @if (fieldError('purchaseDate'); as e) { <small class="error">{{ e }}</small> }
+  </label>
+  <label>
+    <span>Purchase cost (USD)</span>
+    <input type="number" min="0" step="0.01" formControlName="purchaseCost" />
+    @if (fieldError('purchaseCost'); as e) { <small class="error">{{ e }}</small> }
+  </label>
+  <label class="wide">
+    <span>Notes</span>
+    <textarea rows="3" formControlName="notes"></textarea>
+    @if (fieldError('notes'); as e) { <small class="error">{{ e }}</small> }
+  </label>
+  <div class="wide actions">
+    <button type="submit" class="btn primary" [disabled]="saving()">{{ saving() ? 'Saving…' : 'Save asset' }}</button>
+  </div>
+</form>
